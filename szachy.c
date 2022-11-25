@@ -192,13 +192,11 @@ int main(void){
         10, 11, 12, 12, 12, 12, 5, 4,
         8, 11, 12, 12, 12, 12, 5, 2
     };
-    
     while (1){
         
         // ruch komputera
         int px, py, fx, fy, wynik;
         generator(board, 4, &fx, &fy, &px, &py);
-        printf("%d\n", wynik);
         // promocja na hetmana
         if (board[px][py]==11 && fy==7){
             board[fx][fy] = 7;
@@ -207,11 +205,12 @@ int main(void){
             board[fx][fy] = board[px][py];
         }
         board[px][py] = 12;
-        wynik = generator(board, 4, &fx, &fy, &px, &py);
-        if (wynik>100){
+        wynik = generator(board, 2, &fx, &fy, &px, &py);
+        if (2*wynik>WIN){
             printf("Przegrales :(");
             break;
         }
+
 
         wypisz(board);
         // Ruch gracza
@@ -228,8 +227,8 @@ int main(void){
             board[7-sx][sy] = 12;
             wypisz(board);
         }
-        wynik = generator(board, 1, &fx, &fy, &px, &py);
-        if (wynik<-100){
+        wynik = generator(board, 2, &fx, &fy, &px, &py);
+        if (2*wynik<GAME_OVER){
             printf("Wygrales!!\n");
             break;
         }
@@ -240,10 +239,13 @@ int main(void){
 // BLEDY
 /*
     1. Nie mam ochrony zeby cos nie przeskoczylo nad figura przeciwnika
-    2. Mat komp mat gracz
     3. Pat
     4. Roszady
     5. Mala glebia
     6. W pierwszym ruchu pion 2 do przodu
     7. Czy gracz robi dobre ruchy
+    
+   ROZWIAZANE 
+    2. Mat komp mat gracz
+
 */
